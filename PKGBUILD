@@ -1,25 +1,26 @@
-# Maintainer: graysky <graysky AT archlnux.us>
+# Maintainer: Eric Webb <opensource AT collectivegenius.net>
+# Contributor: graysky <graysky AT archlnux.us>
 # Contributor: A.J. Korf <jacobkorf at gmail dot com>
 # Contrubutor: Thomas Baechler <thomas@archlinux.org>
 
-pkgname=nvidia-ck
+pkgname=nvidia-319-ck
 pkgver=319.32
-_extramodules=extramodules-3.10-ck
-pkgrel=4
+_extramodules=extramodules-3.12-ck
+pkgrel=0
 _pkgdesc="NVIDIA drivers for linux-ck."
 pkgdesc="$_pkgdesc"
 arch=('i686' 'x86_64')
 url="http://www.nvidia.com/"
-depends=('linux-ck>=3.10' 'linux-ck<3.11' "nvidia-libgl" "nvidia-utils=${pkgver}")
-makedepends=('linux-ck-headers>=3.10' 'linux-ck-headers<3.11')
+depends=('linux-ck>=3.12' 'linux-ck<3.13' "nvidia-libgl" "nvidia-utils=${pkgver}")
+makedepends=('linux-ck-headers>=3.12' 'linux-ck-headers<3.13')
 conflicts=('nvidia-96xx-all' 'nvidia-173xx-all' 'nvidia-275xx-ck' 'nvidia-ck-stable' 'nvidia-beta-ck' 'nvidia-ck-atom' 'nvidia-ck-barcelona' 'nvidia-ck-bulldozer' 'nvidia-ck-corex' 'nvidia-ck-core2' 'nvidia-ck-haswell' 'nvidia-ck-ivybridge' 'nvidia-ck-kx' 'nvidia-ck-k10' 'nvidia-ck-nehalem' 'nvidia-ck-p4' 'nvidia-ck-piledriver' 'nvidia-ck-pentm' 'nvidia-ck-sandybridge' 'nvidia-304xx-ck' 'nvidia-304xx-ck-atom' 'nvidia-304xx-ck-barcelona' 'nvidia-304xx-ck-corex' 'nvidia-304xx-ck-core2' 'nvidia-304xx-ck-haswell' 'nvidia-304xx-ck-ivybridge' 'nvidia-304xx-ck-kx' 'nvidia-304xx-ck-k10' 'nvidia-304xx-ck-nehalem' 'nvidia-304xx-ck-p4' 'nvidia-304xx-ck-piledriver' 'nvidia-304xx-ck-pentm' 'nvidia-304xx-ck-sandybridge')
 #groups=('ck-generic')
 #replaces=()
 license=('custom')
 install=nvidia-ck.install
 options=(!strip)
-source=('nvidia-linux-3.10.patch')
-md5sums=('547b74f49f81b22f214e2770e31d62b6')
+source=('nvidia-linux-3.10.patch' 'nvidia-linux-3.12.patch')
+md5sums=('547b74f49f81b22f214e2770e31d62b6' '60e7c3b1241400092f8e507ae59686ea')
 
 if [ "$CARCH" = "i686" ]; then
     _arch='x86'
@@ -38,6 +39,7 @@ build() {
 	sh ${_pkg}.run --extract-only
 	cd ${_pkg}/kernel
 	patch -Np2 -i ${srcdir}/nvidia-linux-3.10.patch
+	patch -Np1 -i ${srcdir}/nvidia-linux-3.12.patch
 	make SYSSRC=/usr/lib/modules/"${_kernver}/build" module
 }
 
