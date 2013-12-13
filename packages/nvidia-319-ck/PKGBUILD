@@ -19,8 +19,8 @@ conflicts=('nvidia-96xx-all' 'nvidia-173xx-all' 'nvidia-275xx-ck' 'nvidia-ck-sta
 license=('custom')
 install=nvidia-ck.install
 options=(!strip)
-source=('nvidia-linux-3.10.patch' 'nvidia-linux-3.12.patch')
-md5sums=('547b74f49f81b22f214e2770e31d62b6' '60e7c3b1241400092f8e507ae59686ea')
+source=('.AURINFO' 'nvidia-linux-3.10.patch' 'nvidia-linux-3.12.patch')
+md5sums=('fb50c1b0926f3bddf32029c7c72dccb7' '547b74f49f81b22f214e2770e31d62b6' '60e7c3b1241400092f8e507ae59686ea')
 
 if [ "$CARCH" = "i686" ]; then
     _arch='x86'
