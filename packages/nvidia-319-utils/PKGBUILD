@@ -1,8 +1,9 @@
 # $Id$
+# Maintainer: Eric Webb <opensource @ collectivegenius.net>
 # Maintainer: Thomas Baechler <thomas@archlinux.org>
 # Contributor: James Rayner <iphitus@gmail.com>
-pkgbase=nvidia-utils
-pkgname=('nvidia-utils' 'nvidia-libgl' 'opencl-nvidia')
+pkgbase=nvidia-319-utils
+pkgname=('nvidia-319-utils' 'nvidia-319-libgl' 'opencl-nvidia-319')
 pkgver=319.32
 pkgrel=1
 arch=('i686' 'x86_64')
@@ -36,10 +37,11 @@ build() {
     sh "${_pkg}.run" --extract-only
 }
 
-package_opencl-nvidia() {
+package_opencl-nvidia-319() {
     pkgdesc="OpenCL implemention for NVIDIA"
     depends=('libcl' 'zlib')
     optdepends=('opencl-headers: headers necessary for OpenCL development')
+    conflicts=('opencl-nvidia')
     cd "${srcdir}/${_pkg}"
 
     # OpenCL
@@ -50,10 +52,10 @@ package_opencl-nvidia() {
     create_links
 }
 
-package_nvidia-libgl() {
+package_nvidia-319-libgl() {
     pkgdesc="NVIDIA drivers libraries symlinks"
-    depends=('nvidia-utils')
-    conflicts=('libgl')
+    depends=('nvidia-319-utils')
+    conflicts=('nvidia-libgl')
     provides=('libgl')
     cd "${srcdir}/${_pkg}"
 
@@ -67,11 +69,12 @@ package_nvidia-libgl() {
     ln -s "libGL.so.${pkgver}" "${pkgdir}/usr/lib/libGL.so"
 }
 
-package_nvidia-utils() {
+package_nvidia-319-utils() {
     pkgdesc="NVIDIA drivers utilities"
     depends=('xorg-server')
     optdepends=('gtk2: nvidia-settings'
                 'opencl-nvidia: OpenCL support')
+    conflicts=('nvidia-utils')
     cd "${srcdir}/${_pkg}"
 
     # X driver
