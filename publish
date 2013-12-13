@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+#
+# Builds the website locally and published to the 'gh-pages' branch statically
+#
+# This is to allow site generation that isn't supported on Github
+#
+
+set -e
+
+git clean -xdf
+
+jekyll build
+
+
+SITE=`mktemp -dt nvidia-319-ck-site.XXXXXX`
+mv _site/* $SITE
+rm -rf _site
+
+git checkout gh-pages
+git clean -xdf
+git rm -rf .
+cp -r $SITE/* .
+rm -rf $SITE
+
+git add .
+git commit
