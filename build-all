@@ -1,0 +1,47 @@
+#!/usr/bin/env ruby
+
+#
+# Builds all binary packages 
+#
+
+require 'fileutils'
+
+ROOT = Dir.pwd
+DIST = "#{ROOT}/dist"
+DIST_BIN = "#{DIST}/bin"
+DIST_SRC = "#{DIST}/src"
+
+# cleanup ./dist dir
+FileUtils.rm_rf DIST if File.exists? DIST
+Dir.mkdir DIST
+Dir.mkdir DIST_BIN
+Dir.mkdir DIST_SRC
+
+# delete any existing built packages
+Dir.glob 'packages/**/*.pkg.tar.xz' do |match|
+    puts "Deleting #{match}"
+    File.delete match
+end
+
+package_directories = ['nvidia-319-ck', 'nvidia-319-utils', 'nvidia-319-libgl', 'lib32-nvidia-319-utils', 'lib32-nvidia-319-libgl']
+package_directories.each do |package|
+    # cd ./packages/PACKAGE
+    Dir.chdir File.join(ROOT, 'packages', package)
+
+    # rm -rf ./src
+    FileUtils.rm_rf 'src' 
+
+    puts "Building #{package} sources..."
+    unless system 'makepkg -cSf'
+        raise 'it failed'
+    end
+
+    puts "Building #{package} binaries..."
+    unless system 'makepkg -c'
+        raise 'it failed'
+    end
+
+    # copy to output directory
+    FileUtils.mv Dir.glob('*.pkg.tar.xz'), DIST_BIN
+    FileUtils.mv Dir.glob('*.src.tar.gz'), DIST_SRC
+end
