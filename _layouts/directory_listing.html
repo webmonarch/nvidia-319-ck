@@ -1,0 +1,23 @@
+---
+layout: default
+title:
+---
+
+<style type='text/css'>
+table td {
+  padding: 10px 10px 0 10px;
+}
+</style>
+
+<h2>{{ page.dir }}</h2>
+
+<table>
+<tr><th>Name</th><th>Size</th><th>Modified</th></tr>
+{% for file in page.files %}
+<tr>
+    <td><a href="{{ file.name }}">{{ file.name }}</a></td>
+    <td>{{ file.size }}</td>
+    <td>{{ file.modified | date_to_rfc822 }}</td>
+</tr>
+{% endfor %}
+</table>
