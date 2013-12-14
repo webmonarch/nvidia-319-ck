@@ -1,0 +1,41 @@
+# $Id$
+# Maintainer: Eric Webb <opensource @ collectivegenius.net>
+# Contributor: Thomas Baechler <thomas@archlinux.org>
+# Contributor: James Rayner <iphitus@gmail.com>
+
+_pkgbasename=opencl-nvidia-319
+pkgname=lib32-$_pkgbasename
+pkgver=319.32
+pkgrel=1
+arch=('x86_64')
+pkgdesc="OpenCL implemention for NVIDIA (32-bit)"
+depends=('lib32-libcl' 'lib32-zlib')
+optdepends=('opencl-headers: headers necessary for OpenCL development')
+conflicts=('lib32-opencl-nvidia')
+url="http://www.nvidia.com/"
+license=('custom')
+options=('!strip')
+
+_arch='x86'
+_pkg="NVIDIA-Linux-${_arch}-${pkgver}"
+source=("ftp://download.nvidia.com/XFree86/Linux-${_arch}/${pkgver}/${_pkg}.run")
+md5sums=('978339ff37c3207f3a39d3952721dcdb')
+
+build() {
+    cd "${srcdir}"
+    sh ${_pkg}.run --extract-only
+}
+
+package() {
+    cd "${srcdir}/${_pkg}"
+
+    # OpenCL
+    install -D -m755 "libnvidia-compiler.so.${pkgver}" "${pkgdir}/usr/lib32/libnvidia-compiler.so.${pkgver}"
+    ln -s "libnvidia-compiler.so.${pkgver}" "${pkgdir}/usr/lib32/libnvidia-compiler.so.1"
+    ln -s "libnvidia-compiler.so.${pkgver}" "${pkgdir}/usr/lib32/libnvidia-compiler.so"
+
+    install -D -m755 "libnvidia-opencl.so.${pkgver}" "${pkgdir}/usr/lib32/libnvidia-opencl.so.${pkgver}" 
+    ln -s "libnvidia-opencl.so.${pkgver}" "${pkgdir}/usr/lib32/libnvidia-opencl.so.1"
+    ln -s "libnvidia-opencl.so.${pkgver}" "${pkgdir}/usr/lib32/libnvidia-opencl.so"
+}
+
