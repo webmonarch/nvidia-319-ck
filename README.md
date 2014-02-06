@@ -1,6 +1,19 @@
 nvidia-319-ck Arch Linux Package
 =================================
 
+## Status
+
+**Updated: 2014-02-06**
+
+Unfortunately, there is no place for this package to go.
+
+319.32 isn't compatible with xorg-server 1.15. The latest 319.76 IS compatible with xorg-server 1.15, but breaks other stuff on my machine (specifically vmware: https://bbs.archlinux.org/viewtopic.php?id=173111).
+
+As such, there is no where else for this package to go. I am going to try NVIDIA's recommended 304.119. 
+
+Ping me if you think otherwise.
+
+
 ## Purpose
 
 To maintain the 319.XX versions of the nvidia proprietary drivers and utilities for current Arch Linux kernels.
