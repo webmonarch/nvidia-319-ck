@@ -5,7 +5,7 @@
 
 _pkgbasename=nvidia-319-libgl
 pkgname=lib32-$_pkgbasename
-pkgver=319.32
+pkgver=319.76
 pkgrel=1
 arch=('x86_64')
 pkgdesc="NVIDIA drivers libraries symlinks (32-bit)"
@@ -19,7 +19,7 @@ options=('!strip')
 
 _arch='x86'
 _pkg="NVIDIA-Linux-${_arch}-${pkgver}"
-source=('.AURINFO' "ftp://download.nvidia.com/XFree86/Linux-${_arch}/${pkgver}/${_pkg}.run")
+source=('.AURINFO' "http://us.download.nvidia.com/XFree86/Linux-${_arch}/${pkgver}/${_pkg}.run")
 md5sums=('e2eba525acf71ab76d25f5ef4be24875' '978339ff37c3207f3a39d3952721dcdb')
 
 build() {

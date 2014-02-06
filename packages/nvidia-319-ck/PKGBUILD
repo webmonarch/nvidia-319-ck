@@ -4,7 +4,7 @@
 # Contrubutor: Thomas Baechler <thomas@archlinux.org>
 
 pkgname=nvidia-319-ck
-pkgver=319.32
+pkgver=319.76
 _extramodules=extramodules-3.12-ck
 pkgrel=1
 _pkgdesc="NVIDIA drivers for linux-ck."
@@ -25,21 +25,21 @@ md5sums=('fb50c1b0926f3bddf32029c7c72dccb7' '547b74f49f81b22f214e2770e31d62b6' '
 if [ "$CARCH" = "i686" ]; then
     _arch='x86'
     _pkg="NVIDIA-Linux-${_arch}-${pkgver}"
-		source+=("ftp://download.nvidia.com/XFree86/Linux-${_arch}/${pkgver}/${_pkg}.run")
+		source+=("http://us.download.nvidia.com/XFree86/Linux-${_arch}/${pkgver}/${_pkg}.run")
     md5sums+=('978339ff37c3207f3a39d3952721dcdb')
 elif [ "$CARCH" = "x86_64" ]; then
     _arch='x86_64'
    _pkg="NVIDIA-Linux-${_arch}-${pkgver}-no-compat32"
-		source+=("ftp://download.nvidia.com/XFree86/Linux-${_arch}/${pkgver}/${_pkg}.run")
-		md5sums+=('d181d856768868823df3bda4607a5315')    
+		source+=("http://us.download.nvidia.com/XFree86/Linux-${_arch}/${pkgver}/${_pkg}.run")
+		md5sums+=('fb50c1b0926f3bddf32029c7c72dccb7')    
 fi
 
 build() {
 	_kernver="$(cat /usr/lib/modules/${_extramodules}/version)"
 	sh ${_pkg}.run --extract-only
 	cd ${_pkg}/kernel
-	patch -Np2 -i ${srcdir}/nvidia-linux-3.10.patch
-	patch -Np1 -i ${srcdir}/nvidia-linux-3.12.patch
+	#patch -Np2 -i ${srcdir}/nvidia-linux-3.10.patch
+	#patch -Np1 -i ${srcdir}/nvidia-linux-3.12.patch
 	make SYSSRC=/usr/lib/modules/"${_kernver}/build" module
 }
 

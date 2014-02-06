@@ -3,7 +3,7 @@
 # Maintainer: Thomas Baechler <thomas@archlinux.org>
 # Contributor: James Rayner <iphitus@gmail.com>
 pkgname=nvidia-319-utils
-pkgver=319.32
+pkgver=319.76
 pkgrel=1
 pkgdesc="NVIDIA drivers utilities"
 arch=('i686' 'x86_64')
@@ -20,13 +20,13 @@ md5sums=('3d83c2679ca354cae77471dd2b197f81')
 if [ "$CARCH" = "i686" ]; then
     _arch='x86'
     _pkg="NVIDIA-Linux-${_arch}-${pkgver}"
-    source+=("ftp://download.nvidia.com/XFree86/Linux-${_arch}/${pkgver}/${_pkg}.run")
+    source+=("http://us.download.nvidia.com/XFree86/Linux-${_arch}/${pkgver}/${_pkg}.run")
     md5sums+=('978339ff37c3207f3a39d3952721dcdb')
 elif [ "$CARCH" = "x86_64" ]; then
     _arch='x86_64'
    _pkg="NVIDIA-Linux-${_arch}-${pkgver}-no-compat32"
-    source+=("ftp://download.nvidia.com/XFree86/Linux-${_arch}/${pkgver}/${_pkg}.run")
-    md5sums+=('d181d856768868823df3bda4607a5315')
+    source+=("http://us.download.nvidia.com/XFree86/Linux-${_arch}/${pkgver}/${_pkg}.run")
+    md5sums+=('fb50c1b0926f3bddf32029c7c72dccb7')
 fi
 
 create_links() {
