@@ -3,7 +3,7 @@
 # Maintainer: Thomas Baechler <thomas@archlinux.org>
 # Contributor: James Rayner <iphitus@gmail.com>
 pkgname=nvidia-319-libgl
-pkgver=319.76
+pkgver=304.119
 pkgrel=1
 arch=('i686' 'x86_64')
 pkgdesc="NVIDIA drivers libraries symlinks"

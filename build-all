@@ -23,7 +23,7 @@ Dir.glob 'packages/**/*.pkg.tar.xz' do |match|
     File.delete match
 end
 
-package_directories = ['nvidia-319-ck', 'nvidia-319-utils', 'nvidia-319-libgl', 'lib32-nvidia-319-utils', 'lib32-nvidia-319-libgl']
+package_directories = ['nvidia-319-utils', 'nvidia-319-ck', 'nvidia-319-libgl', 'lib32-nvidia-319-utils', 'lib32-nvidia-319-libgl']
 package_directories.each do |package|
     # cd ./packages/PACKAGE
     Dir.chdir File.join(ROOT, 'packages', package)
@@ -32,12 +32,12 @@ package_directories.each do |package|
     FileUtils.rm_rf 'src' 
 
     puts "Building #{package} sources..."
-    unless system 'makepkg -cSf'
+    unless system 'makepkg -cSf --nodeps --skipchecksums'
         raise 'it failed'
     end
 
     puts "Building #{package} binaries..."
-    unless system 'makepkg -c'
+    unless system 'makepkg -c --nodeps --skipchecksums'
         raise 'it failed'
     end
 
