@@ -25,7 +25,7 @@ elif [ "$CARCH" = "x86_64" ]; then
     _arch='x86_64'
    _pkg="NVIDIA-Linux-${_arch}-${pkgver}-no-compat32"
     source+=("http://us.download.nvidia.com/XFree86/Linux-${_arch}/${pkgver}/${_pkg}.run")
-    md5sums+=('fb50c1b0926f3bddf32029c7c72dccb7')
+    md5sums+=('22d36952b3320a6b558e37746827f6d8')
 fi
 
 build() {
