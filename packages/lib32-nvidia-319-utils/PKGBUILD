@@ -19,7 +19,7 @@ options=('!strip')
 _arch='x86'
 _pkg="NVIDIA-Linux-${_arch}-${pkgver}"
 source=('.AURINFO' "http://us.download.nvidia.com/XFree86/Linux-${_arch}/${pkgver}/${_pkg}.run")
-md5sums=('c1b4ab0ddc5c2f1ba3b6b581b6250393' '978339ff37c3207f3a39d3952721dcdb')
+md5sums=('c1b4ab0ddc5c2f1ba3b6b581b6250393' 'f559d325b334f5bb3d0467b2a4a715bd')
 
 build() {
     cd "${srcdir}"
